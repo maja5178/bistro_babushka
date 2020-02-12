@@ -36,6 +36,39 @@
         .oversigt {
             background-color: gainsboro;
         }
+
+
+        #detalje {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .5);
+            overflow: scroll;
+        }
+
+        #detalje .button {
+            font-size: 2rem;
+            background: none;
+            color: white;
+            border: none;
+            position: fixed;
+            top: 0.3em;
+            left: 0.3em;
+            cursor: pointer;
+        }
+
+        #detalje .retter {
+            margin: 3em;
+            padding: 2em;
+            background-color: white;
+
+        }
+
+        .skjul {
+            display: none;
+        }
     </style>
 </head>
 
@@ -69,12 +102,24 @@
         </article>
     </template>
 
+    <section id="detalje" class="skjul">
+        <button class="button">X</button>
+
+        <article class="retter">
+            <h1></h1>
+            <img src="" alt="">
+            <p class="lang"></p>
+        </article>
+    </section>
+
 
     <script>
         const endpoint = ("https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json");
 
         let retData = [];
         let filter = "alle";
+
+        const detalje = document.querySelector("#detalje");
 
 
         document.addEventListener("DOMContentLoaded", start);
@@ -97,25 +142,46 @@
 
         function visMenu() {
             //const container = document.querySelector("#data_container");
+
             data_container.innerHTML = "";
             const oversigtTemplate = document.querySelector("template");
 
-            retData.feed.entry.forEach(retter => {
+            retData.feed.entry.forEach(ret => {
 
-                if (filter == "alle" || filter == retter.gsx$kategori.$t) {
+                if (filter == "alle" || filter == ret.gsx$kategori.$t) {
 
                     let klon = oversigtTemplate.cloneNode(true).content;
 
-                    klon.querySelector("img").src = `imgs/small/${retter.gsx$billede.$t}-sm.jpg`;
+                    klon.querySelector("img").src = `imgs/small/${ret.gsx$billede.$t}-sm.jpg`;
 
-                    klon.querySelector("h3").textContent = ` ${retter.gsx$navn.$t}`;
+                    klon.querySelector("h3").textContent = ` ${ret.gsx$navn.$t}`;
 
-                    klon.querySelector(".pris").textContent = `Pris: ${retter.gsx$pris.$t}`;
-                    klon.querySelector(".kort").textContent = ` ${retter.gsx$kort.$t}`;
+                    klon.querySelector(".pris").textContent = `Pris: ${ret.gsx$pris.$t}`;
+                    klon.querySelector(".kort").textContent = ` ${ret.gsx$kort.$t}`;
+
+                    klon.querySelector("article").addEventListener("click", () => visDetalje(ret));
 
                     data_container.appendChild(klon);
+
+
                 }
             })
+        }
+
+
+        function visDetalje(ret) {
+            console.log(ret);
+            detalje.classList.remove("skjul")
+            detalje.querySelector("button").addEventListener("click", () => detalje.classList.add("skjul"))
+
+            detalje.querySelector("h1").textContent = ret.gsx$navn.$t;
+
+
+            detalje.querySelector("img").src = `imgs/large/${ret.gsx$billede.$t}.jpg`;
+
+
+            detalje.querySelector(".lang").textContent = ret.gsx$lang.$t;
+
         }
 
         function addEventlistenersToButtons() {
