@@ -3,7 +3,7 @@ img {
 }
 
 body {
-    background-color: palevioletred;
+    background-color: #842730;
 }
 
 h1 {
@@ -13,7 +13,7 @@ h1 {
 
     margin-top: 1.5em;
     margin-bottom: inherit;
-    color: white;
+    color: #fff4e8;
     font-size: 3rem;
 
     font-size: 4rem;
@@ -35,6 +35,13 @@ h5 {
     margin: inherit;
 }
 
+h4 {
+    font-size: 6rem;
+    color: #842730;
+
+    font-family: 'Odibee Sans', cursive;
+}
+
 h6 {
     margin: inherit;
     font-weight: 400;
@@ -44,6 +51,11 @@ h6 {
 
 p {
     font-family: 'Noto Sans KR', sans-serif;
+}
+
+footer {
+    height: 100px;
+
 }
 
 
@@ -63,19 +75,19 @@ button {
     padding: 0.5em;
 
     background: none;
-    border-color: white;
+    border-color: #fff4e8;
     margin: 0.5em;
-    color: white;
+    color: #fff4e8;
 }
 
 button:hover {
-    background-color: white;
-    color: palevioletred;
+    background-color: #fff4e8;
+    color: #842730;
 }
 
 .red {
-    background-color: white;
-    color: palevioletred;
+    background-color: #fff4e8;
+    color: #842730;
 }
 
 nav {
@@ -86,7 +98,8 @@ nav {
 
 
 
-    background-color: white;
+    background-color: #fff4e8;
+    ;
     position: fixed;
     width: 100%;
     top: 0px;
@@ -104,7 +117,7 @@ nav {
 }
 
 .logo {
-    color: #de9aac;
+    color: #842730;
     font-size: 2.4rem;
     font-family: 'Odibee Sans', cursive;
 
@@ -122,7 +135,7 @@ a {
 }
 
 a:hover {
-    color: #de9aac;
+    color: #842730;
 }
 
 
