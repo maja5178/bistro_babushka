@@ -4,37 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         img {
             width: 100%;
         }
 
-        h1,
-        nav {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-
-        }
-
-        button {
-            background-color: white;
-        }
-
-        .red {
-            background-color: red;
-        }
 
         #data_container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             grid-gap: 35px;
-            width: 900px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .oversigt {
-            background-color: gainsboro;
+            background-color: white;
+            box-shadow: 0px 0px 7px rgba(69, 69, 69, 0.69);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            ;
+        }
+
+        .oversigt:hover {
+            background-color: white;
+            box-shadow: 0px 0px 17px rgba(69, 69, 69, 0.69);
+            transform: scale(1.02);
+        }
+
+        .oversigt p,
+        h3 {
+            padding-left: 1em;
+            padding-right: 1em;
+            margin: inherit;
+        }
+
+        .oversigt .pris {
+            margin-top: 1em;
+            display: flex;
+            justify-content: flex-end;
         }
 
 
@@ -44,8 +56,9 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, .5);
+            background-color: rgba(0, 0, 0, 0.62);
             overflow: scroll;
+
         }
 
         #detalje .button {
@@ -54,36 +67,69 @@
             color: white;
             border: none;
             position: fixed;
-            top: 0.3em;
+            top: 2.3em;
             left: 0.3em;
             cursor: pointer;
         }
 
         #detalje .retter {
             margin: 3em;
+            margin-left: 5em;
+            margin-right: 5em;
             padding: 2em;
             background-color: white;
-
         }
 
         .skjul {
             display: none;
         }
+
+
+        #detalje {
+            margin-top: 3em;
+        }
+
     </style>
+
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Odibee+Sans&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Unica+One&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <header>
         <nav>
-            <button class="filter valgt" data-kategori="alle">Menu</button>
-            <button class="filter valgt" data-kategori="forretter">Forretter</button>
-            <button class="filter valgt" data-kategori="hovedretter">Hovedretter</button>
-            <button class="filter valgt" data-kategori="desserter">Desserter</button>
-            <button class="filter valgt" data-kategori="drikkevarer">Drikkevarer</button>
-            <button class="filter valgt" data-kategori="sideorders">Sideorders</button>
+
+            <a href="index.html">
+                <div class="logo">
+                    <h5>Babushka</h5>
+                </div>
+            </a>
+
+            <div class="nav_right">
+                <a href="liste_view.html">
+                    <h6>Liste</h6>
+                </a>
+                <a href="index.html#data_container">
+                    <h6>Oversigt</h6>
+                </a>
+            </div>
+
         </nav>
     </header>
+
+
+    <div class="nav">
+        <button class="filter valgt" data-kategori="alle">Alle</button>
+        <button class="filter valgt" data-kategori="forretter">Forretter</button>
+        <button class="filter valgt" data-kategori="hovedretter">Hovedretter</button>
+        <button class="filter valgt" data-kategori="desserter">Desserter</button>
+        <button class="filter valgt" data-kategori="drikkevarer">Drikkevarer</button>
+        <button class="filter valgt" data-kategori="sideorders">Sideorders</button>
+    </div>
 
     <h1>
         Menu
@@ -97,7 +143,7 @@
         <article class="oversigt">
             <img src="" alt="">
             <h3></h3>
-            <p class="kort"></p>
+            <p class="kort"><br></p>
             <p class="pris"></p>
         </article>
     </template>
@@ -106,7 +152,7 @@
         <button class="button">X</button>
 
         <article class="retter">
-            <h1></h1>
+            <h2></h2>
             <img src="" alt="">
             <p class="lang"></p>
         </article>
@@ -156,7 +202,7 @@
 
                     klon.querySelector("h3").textContent = ` ${ret.gsx$navn.$t}`;
 
-                    klon.querySelector(".pris").textContent = `Pris: ${ret.gsx$pris.$t}`;
+                    klon.querySelector(".pris").textContent = `Pris: ${ret.gsx$pris.$t},-`;
                     klon.querySelector(".kort").textContent = ` ${ret.gsx$kort.$t}`;
 
                     klon.querySelector("article").addEventListener("click", () => visDetalje(ret));
@@ -174,7 +220,7 @@
             detalje.classList.remove("skjul")
             detalje.querySelector("button").addEventListener("click", () => detalje.classList.add("skjul"))
 
-            detalje.querySelector("h1").textContent = ret.gsx$navn.$t;
+            detalje.querySelector("h2").textContent = ret.gsx$navn.$t;
 
 
             detalje.querySelector("img").src = `imgs/large/${ret.gsx$billede.$t}.jpg`;
@@ -210,5 +256,8 @@
 
             document.querySelector("h1").textContent = this.textContent;
         }
+
     </script>
-</body></html>
+</body>
+
+</html>

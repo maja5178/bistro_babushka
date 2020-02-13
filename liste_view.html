@@ -4,57 +4,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Odibee+Sans&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Unica+One&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700&display=swap" rel="stylesheet">
+
     <style>
-        img {
-            width: 100%;
-        }
-
-        h1,
-        nav {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-
-        }
-
         .kategori {
             text-transform: uppercase;
         }
 
-        button {
-            background-color: white;
-        }
-
-        .red {
-            background-color: red;
-        }
 
         #data_container {
             display: grid;
             grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
             grid-gap: 45px;
-            width: 900px;
+            width: 1000px;
             margin: 0 auto;
+
         }
 
         .oversigt {
-            background-color: gainsboro;
+            padding: 2em;
         }
+
+        .oversigt:nth-child(2n) {
+            background-color: rgb(255, 255, 255);
+        }
+
+        section {
+            background-color: rgba(255, 255, 255, 0.35);
+            max-width: 900px;
+        }
+
+        .oversigt p,
+        h3 {
+            margin: inherit;
+        }
+
+        .oversigt h3 {
+            font-size: 1.5rem;
+        }
+
     </style>
+
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Odibee+Sans&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
     <header>
         <nav>
-            <button class="filter valgt" data-kategori="alle">Alle</button>
-            <button class="filter valgt" data-kategori="forretter">Forretter</button>
-            <button class="filter valgt" data-kategori="hovedretter">Hovedretter</button>
-            <button class="filter valgt" data-kategori="desserter">Desserter</button>
-            <button class="filter valgt" data-kategori="drikkevarer">Drikkevarer</button>
-            <button class="filter valgt" data-kategori="sideorders">Sideorders</button>
+
+            <a href="index.html">
+                <div class="logo">
+                    <h5>Babushka</h5>
+                </div>
+            </a>
+
+            <div class="nav_right">
+                <a href="liste_view.html">
+                    <h6>Liste</h6>
+                </a>
+                <a href="index.html#data_container">
+                    <h6>Oversigt</h6>
+                </a>
+            </div>
+
         </nav>
     </header>
+
+
+    <div class="nav">
+        <button class="filter" data-kategori="alle">Alle</button>
+        <button class="filter" data-kategori="forretter">Forretter</button>
+        <button class="filter" data-kategori="hovedretter">Hovedretter</button>
+        <button class="filter" data-kategori="desserter">Desserter</button>
+        <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
+        <button class="filter" data-kategori="sideorders">Sideorders</button>
+    </div>
 
     <h1>
         Menu
@@ -62,6 +92,7 @@
 
     <section id="data_container"></section>
     <template>
+
         <article class="oversigt">
             <p class="kategori"></p>
             <h3></h3>
@@ -112,7 +143,7 @@
 
                     klon.querySelector("h3").textContent = ` ${ret.gsx$navn.$t}`;
 
-                    klon.querySelector(".pris").textContent = `Pris: ${ret.gsx$pris.$t}`;
+                    klon.querySelector(".pris").textContent = `Pris: ${ret.gsx$pris.$t},-`;
                     klon.querySelector(".kort").textContent = ` ${ret.gsx$kort.$t}`;
 
                     klon.querySelector("article").addEventListener("click", () => {
@@ -153,5 +184,8 @@
 
             document.querySelector("h1").textContent = this.textContent;
         }
+
     </script>
-</body></html>
+</body>
+
+</html>
